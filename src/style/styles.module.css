@@ -1,0 +1,23 @@
+.link {
+  cursor: pointer;
+  font-size: 14px;
+}
+.layout {
+  height: calc(100vh - 154px);
+}
+.input_style {
+  background: none;
+  border: 1px solid #838383;
+  width: 100%;
+  padding: 18px 14px;
+  color: #fdfdfd;
+  outline: none;
+  font-size: 14px;
+}
+.bottom_navbar {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
