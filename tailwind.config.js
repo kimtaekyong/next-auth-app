@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Pretendard: ["Pretendard"],
+        gowun: ['"Gowun Batang"', "serif"],
       },
       marginAuto: {
         margin: "0 auto",
@@ -26,10 +27,13 @@ module.exports = {
     fontSize: {
       sm: "14px",
       base: "16px",
-      xl: "20px",
+      lg: "18px",
+      xl: "24px",
       "2xl": "28px",
-      "3xl": "32px",
+      "3xl": "38px",
       "4xl": "42px",
+      "5xl": "48px",
+      "6xl": "54px",
     },
     fontWeight: {
       thin: "100",
@@ -37,6 +41,8 @@ module.exports = {
       light: "300",
       medium: "500",
       bold: "700",
+      extrabold: "800",
+      black: "900",
     },
   },
   plugins: [],

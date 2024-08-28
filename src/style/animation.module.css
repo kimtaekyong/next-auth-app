@@ -1,0 +1,13 @@
+/* styles/animation.module.css */
+@keyframes smoothBlink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.smoothBlink {
+  animation: smoothBlink 2s linear;
+}

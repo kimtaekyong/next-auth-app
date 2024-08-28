@@ -1,12 +1,12 @@
-// /app/api/auth/register.js
+// /app/api/auth/register/route.js
 const { NextResponse } = require("next/server");
 const pool = require("@/lib/db");
 const bcrypt = require("bcrypt");
 
 async function POST(request) {
-  const { username, password, confirmPassword, contact } = await request.json();
+  const { username, password, confirmPassword, contact, email } = await request.json();
 
-  if (!username || !password || !confirmPassword || !contact) {
+  if (!username || !password || !confirmPassword || !contact || !email) {
     return NextResponse.json({ error: "모든 필드를 입력해야 합니다." }, { status: 400 });
   }
 
@@ -20,6 +20,12 @@ async function POST(request) {
     return NextResponse.json({ error: "비밀번호는 대문자 하나와 특수 문자를 포함해야 합니다." }, { status: 400 });
   }
 
+  // 이메일 유효성 체크
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return NextResponse.json({ error: "유효한 이메일 주소를 입력해야 합니다." }, { status: 400 });
+  }
+
   try {
     // 사용자 이름 중복 체크
     const [existingUser] = await pool.query("SELECT * FROM users WHERE username = ?", [username]);
@@ -27,14 +33,21 @@ async function POST(request) {
       return NextResponse.json({ error: "이미 존재하는 사용자 이름입니다." }, { status: 400 });
     }
 
+    // 이메일 중복 체크
+    const [existingEmail] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+    if (existingEmail.length > 0) {
+      return NextResponse.json({ error: "이미 등록된 이메일 주소입니다." }, { status: 400 });
+    }
+
     // 비밀번호 해시화
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 사용자 정보를 데이터베이스에 삽입
-    await pool.query("INSERT INTO users (username, password, contact) VALUES (?, ?, ?)", [
+    await pool.query("INSERT INTO users (username, password, contact, email) VALUES (?, ?, ?, ?)", [
       username,
       hashedPassword,
       contact,
+      email,
     ]);
 
     return NextResponse.json({ success: true });

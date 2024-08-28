@@ -3,6 +3,7 @@ import styles from "../../../style/styles.module.css";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth"; // 훅 가져오기
 import Button from "../../Component/Button";
+import Link from "next/link";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -15,13 +16,18 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={`${styles.layout} flex justify-center items-center flex-col`}>
-      <div>
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-white">안녕하세요.</h1>
-          <span className="text-lg font-base text-white">로그인</span>
+    <div className={`${styles.layout} flex flex-col gap-y-4`}>
+      <div className="w-full">
+        <div className="mb-4">
+          <h1 className="text-3xl font-extrabold mb-2 text-gray font-Pretendard leading-snug	">
+            안녕하세요.
+            <br />
+            부고알람서비스
+            <br />
+            <p className="font-light">조등입니다.</p>
+          </h1>
         </div>
-        <form onSubmit={handleSubmit} className="w-[300px]">
+        <form onSubmit={handleSubmit} className="">
           <div className="flex items-center flex-col gap-y-2">
             <input
               type="text"
@@ -39,16 +45,28 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="비밀번호"
             />
+            <Button type="submit" className="p-4" text="로그인" color="#1f1f1f"></Button>
             {error && (
-              <div className="text-sm" style={{ color: "red" }}>
+              <div className="text-sm" style={{ color: "red", fontSize: "14px", fontWeight: "700" }}>
                 {error}
               </div>
-            )}{" "}
-            {/* 오류 메시지 표시 */}
-            <Button type="submit" className="p-4" text="로그인" color="#18864A"></Button>
+            )}
+            <Link href="/page/FindAccount" className="pt-3 pb-2 text-nomal text-grey">
+              비밀번호찾기
+            </Link>
           </div>
         </form>
       </div>
+      <div className={`${styles.example} flex justify-center items-center gap-x-7`}>
+        <p className="flex flex-none text-base font-bold py-1 text-[#000] text-opacity-40">또는</p>
+      </div>
+      <span className="pt-7 font-bold flex justify-center items-center text-base gap-x-1 text-[#000] text-opacity-30">
+        지금 바로 조등
+        <Link href="/page/signup" className="text-[#1f1f1f]" style={{ borderBottom: "1px solid #1f1f1f" }}>
+          가입
+        </Link>
+        하세요.
+      </span>
     </div>
   );
 };

@@ -13,6 +13,7 @@ const Button = ({ text, onClick, color, disabled }) => {
         cursor: "pointer",
         fontSize: "14px",
         fontWeight: "700",
+        borderRadius: "4px",
         pointerEvents: disabled ? "none" : "auto",
       }}
       disabled={disabled}
