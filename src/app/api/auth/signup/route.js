@@ -1,12 +1,12 @@
-// /app/api/auth/register/route.js
+// /app/api/auth/signup/route.js
 const { NextResponse } = require("next/server");
 const pool = require("@/lib/db");
 const bcrypt = require("bcrypt");
 
 async function POST(request) {
-  const { username, password, confirmPassword, contact, email } = await request.json();
+  const { username, password, confirmPassword, contact, email, membershipLevels } = await request.json();
 
-  if (!username || !password || !confirmPassword || !contact || !email) {
+  if (!username || !password || !confirmPassword || !contact || !email || !membershipLevels) {
     return NextResponse.json({ error: "모든 필드를 입력해야 합니다." }, { status: 400 });
   }
 
@@ -15,13 +15,13 @@ async function POST(request) {
   }
 
   // 비밀번호 복잡성 체크
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])/; // <- 변수를 선언하여 초기화
   if (!passwordRegex.test(password)) {
     return NextResponse.json({ error: "비밀번호는 대문자 하나와 특수 문자를 포함해야 합니다." }, { status: 400 });
   }
 
   // 이메일 유효성 체크
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // <- 변수를 선언하여 초기화
   if (!emailRegex.test(email)) {
     return NextResponse.json({ error: "유효한 이메일 주소를 입력해야 합니다." }, { status: 400 });
   }
@@ -42,13 +42,13 @@ async function POST(request) {
     // 비밀번호 해시화
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const membershipLevel = membershipLevels.length > 0 ? membershipLevels[0] : "지인";
+
     // 사용자 정보를 데이터베이스에 삽입
-    await pool.query("INSERT INTO users (username, password, contact, email) VALUES (?, ?, ?, ?)", [
-      username,
-      hashedPassword,
-      contact,
-      email,
-    ]);
+    await pool.query(
+      "INSERT INTO users (username, password, contact, email, membership_level) VALUES (?, ?, ?, ?, ?)",
+      [username, hashedPassword, contact, email, membershipLevel]
+    );
 
     return NextResponse.json({ success: true });
   } catch (error) {

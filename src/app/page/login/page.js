@@ -1,6 +1,7 @@
 "use client";
 import styles from "../../../style/styles.module.css";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // useRouter 훅을 사용하여 페이지 이동
 import { useAuth } from "@/hooks/useAuth"; // 훅 가져오기
 import Button from "../../Component/Button";
 import Link from "next/link";
@@ -9,17 +10,29 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { error, authenticate } = useAuth();
+  const router = useRouter(); // 페이지 이동을 위해 useRouter 훅 사용
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    authenticate("/api/auth/login", username, password); // 로그인 요청
+    try {
+      const response = await authenticate("/api/auth/login", username, password); // 로그인 요청
+      if (response.redirect) {
+        // 서버 응답에서 redirect URL을 확인하여 페이지 이동
+        router.push(response.redirect);
+      } else if (response.error) {
+        // 오류가 있을 경우 오류 메시지를 표시
+        console.error(response.error);
+      }
+    } catch (err) {
+      console.error("로그인 처리 중 오류 발생:", err);
+    }
   };
 
   return (
     <div className={`${styles.layout} flex flex-col gap-y-4`}>
       <div className="w-full">
         <div className="mb-4">
-          <h1 className="text-3xl font-extrabold mb-2 text-gray font-Pretendard leading-snug	">
+          <h1 className="text-3xl font-extrabold mb-2 text-gray font-Pretendard leading-snug">
             안녕하세요.
             <br />
             부고알람서비스

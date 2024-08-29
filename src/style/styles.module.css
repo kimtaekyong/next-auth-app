@@ -38,3 +38,65 @@
   justify-content: center;
   align-items: center;
 }
+
+.openBtn {
+  background-color: #1f1f1f;
+  width: 48px;
+  height: 48px;
+  color: #fff;
+}
+
+.dropMenu {
+  position: absolute;
+  top: 58px;
+  background-color: #fff;
+  width: 100%;
+  padding: 14px;
+  z-index: 999;
+}
+/* Hide the default checkbox */
+
+.checkboxWrap {
+  display: flex;
+  padding: 8px;
+  column-gap: 8px;
+  background-color: rgba(240, 240, 240, 0.8);
+}
+
+.checkboxButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 46px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.checkboxButton input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkboxButton input[type="checkbox"] + span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.checkboxButton input[type="checkbox"]:checked + span {
+  background-color: #1f1f1f; /* 체크된 상태의 배경색 */
+  border: 1px solid #1f1f1f; /* 체크된 상태의 테두리색 */
+  color: #fff;
+}
+
+.checkboxButton span {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
