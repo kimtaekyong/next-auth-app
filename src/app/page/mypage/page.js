@@ -1,12 +1,12 @@
 "use client";
 
-import styles from "../../../style/styles.module.css";
+import isheader from "../../../style/isheader.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "@/app/Component/Header";
 
 const MyPage = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -19,29 +19,22 @@ const MyPage = () => {
         router.push("/page/login"); // 인증되지 않은 경우 로그인 페이지로 리디렉션
       } else {
         setUser(data.user);
-        setLoading(false);
       }
     };
 
     checkAuth();
   }, [router]);
 
-  if (loading) return <p>Loading...</p>;
+  // user가 null일 때 로딩 상태를 나타내기 위해 바로 return 문을 추가
+  if (!user) return <p></p>;
 
   return (
-    <div className={`${styles.layout} flex justify-center items-center flex-col`}>
-      <h1>My Page</h1>
-      <p>Welcome, {user.username}!</p>
-      {/* 로그아웃 버튼 추가 */}
-      <button
-        onClick={async () => {
-          await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-          router.push("/page/login");
-        }}
-      >
-        로그아웃
-      </button>
-    </div>
+    <>
+      <Header />
+      <div className={`${isheader.layout} flex justify-center items-center flex-col`}>
+        <p className="text-2xl font-bold">{user.username} 님 반갑습니다!</p>
+      </div>
+    </>
   );
 };
 

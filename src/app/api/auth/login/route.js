@@ -29,11 +29,10 @@ async function POST(request) {
       // 회원 등급에 따른 추가 처리
       if (user.membership_level === "지인") {
         // '지인' 등급이면 회원 가입 페이지로 리다이렉트
-        response.headers.set("Location", "/page/signup");
-        response.status = 302; // 리다이렉트 상태 코드
+        response.headers.set("Location", "/page/BoradList");
         return response;
       } else if (user.membership_level === "상주") {
-        response.headers.set("Location", "/page/");
+        response.headers.set("Location", "/page/BoradList");
         // '상주' 등급이면 성공 응답을 반환
         return response;
       } else {

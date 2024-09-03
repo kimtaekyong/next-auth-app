@@ -31,7 +31,7 @@ export async function GET(request) {
     // membership_level에 따라 처리
     if (user.membership_level === "지인") {
       // 'member' 등급인 경우
-      return NextResponse.json({ authenticated: true, user }); // 인증 성공 응답을 반환하고 사용자 정보를 포함시킵니다.
+      return NextResponse.json({ authenticated: true, user, message: "Please complete your registration." }); // 인증 성공 응답을 반환하고 사용자 정보를 포함시킵니다.
     } else if (user.membership_level === "상주") {
       // 'guest' 등급인 경우
       return NextResponse.json({ authenticated: true, user, message: "Please complete your registration." }); // 인증 성공 응답을 반환하되, 등록 완료 요청 메시지를 포함합니다.

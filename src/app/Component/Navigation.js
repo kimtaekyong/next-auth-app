@@ -1,20 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../../style/styles.module.css";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 
 const Navigation = () => {
   return (
     <>
       <div className="max-w-screen-md m-auto">
-        <ul className="flex h-[80px] justify-center items-center px-2 pb-12 bg-white gap-x-3">
+        <ul
+          className={`${styles.border_top} flex h-[80px] justify-center items-center px-2 pb-12 pt-6 bg-white gap-x-7`}
+        >
           <li className={styles.bottom_navbar}>
-            <Link className={styles.link} href="/">
-              홈
-            </Link>
-          </li>
-          <li className={styles.bottom_navbar}>
-            <Link className={styles.link} href="/page/login">
-              로그인
+            <Link className={styles.link} href="/page/BoradList">
+              <HomeOutlinedIcon color="#1f1f1f" sx={{ fontSize: 32 }} />
             </Link>
           </li>
           <li className={styles.bottom_navbar}>
@@ -23,8 +23,13 @@ const Navigation = () => {
             </Link>
           </li>
           <li className={styles.bottom_navbar}>
+            <Link className={styles.link} href="/page/CreateList">
+              <AddBoxOutlinedIcon color="#1f1f1f" sx={{ fontSize: 32 }} />
+            </Link>
+          </li>
+          <li className={styles.bottom_navbar}>
             <Link className={styles.link} href="/">
-              리로드
+              <NotificationsNoneOutlinedIcon color="#1f1f1f" sx={{ fontSize: 32 }} />
             </Link>
           </li>
           <li className={styles.bottom_navbar}>
