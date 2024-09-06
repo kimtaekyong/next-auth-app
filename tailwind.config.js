@@ -7,10 +7,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        Pretendard: ["Pretendard"],
-        gowun: ['"Gowun Batang"', "serif"],
-      },
+      fontFamily: {},
       marginAuto: {
         margin: "0 auto",
       },

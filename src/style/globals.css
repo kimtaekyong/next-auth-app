@@ -14,13 +14,3 @@ body {
     text-wrap: balance;
   }
 }
-
-@layer base {
-  html,
-  input,
-  span,
-  p,
-  button {
-    font-family: "Pretendard";
-  }
-}

@@ -19,7 +19,7 @@ export function useAuth() {
     const data = await res.json();
 
     if (data.success) {
-      router.push("/page/mypage"); // 성공 시 페이지 이동
+      router.push("/page/BoradList"); // 성공 시 페이지 이동
     } else {
       setError(data.error); // 오류 메시지 상태 업데이트
     }

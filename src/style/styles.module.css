@@ -59,7 +59,7 @@
 .checkboxWrap {
   display: flex;
   padding: 8px;
-  column-gap: 8px;
+  column-gap: 4px;
   background-color: rgba(240, 240, 240, 0.8);
 }
 

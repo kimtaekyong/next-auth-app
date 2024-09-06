@@ -1,6 +1,7 @@
 "use client";
 
 import "../style/globals.css";
+import GlobalStyles from "../style/GlobalsStyle";
 import Navigation from "./Component/Navigation";
 import Footer from "./Component/Footer";
 import { usePathname } from "next/navigation";
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="max-w-screen-md m-auto">
+        <GlobalStyles />
         {children}
         {/* 현재 경로가 '/login'이 아닌 경우에만 Footer를 렌더링 */}
         {isInitialPage ? null : isFooterPage ? <Footer /> : <Navigation />}
